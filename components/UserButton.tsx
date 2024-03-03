@@ -8,11 +8,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import UserAvatar from "./UserAvatar";
 
 function UserButton() {
+
+    //Session
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+      <DropdownMenuTrigger>
+        <UserAvatar
+          name="Samuel Lee"
+          image="https://github.com/shadcn.png"
+          className=""
+        />
+      </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
