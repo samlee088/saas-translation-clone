@@ -6,6 +6,7 @@ import { authOptions } from "@/auth";
 import Link from "next/link";
 import { MessagesSquareIcon } from "lucide-react";
 import { getServerSession } from "next-auth";
+import CreateChatButton from "./CreateChatButton";
 
 async function Header() {
   const session = await getServerSession(authOptions);
@@ -22,6 +23,7 @@ async function Header() {
               <Link href={"/chat"} prefetch={false}>
                 <MessagesSquareIcon className="text-black dark:text-white" />
               </Link>
+              <CreateChatButton />
             </>
           ) : (
             <Link href="/pricing" prefetch={false}>
@@ -30,7 +32,7 @@ async function Header() {
           )}
 
           <DarkModeToggle />
-          <UserButton session={session}/>
+          <UserButton session={session} />
         </div>
       </nav>
 
