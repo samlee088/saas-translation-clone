@@ -2,7 +2,6 @@ import { CheckIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import CheckoutButton from "./CheckoutButton";
-import { Button } from "./ui/button";
 
 /* Tiers information can be refactored to be dynamic with data from Stripe */
 const tiers = [
@@ -22,7 +21,7 @@ const tiers = [
   },
   {
     name: "Pro",
-    id: "si_OnlcsLNQYbMVzV",
+    id: "pro",
     href: "#",
     priceMonthly: "$5.99",
     description: "Unlock the Full Potential with Pro!",
@@ -33,7 +32,7 @@ const tiers = [
       "Supports up to 10 languages",
       "Multimedia support in chats (coming soon)",
       "1-hour, dedicated support response time",
-      "Early access to NEw Features",
+      "Early access to New Features",
     ],
   },
 ];
