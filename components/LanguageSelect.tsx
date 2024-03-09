@@ -51,6 +51,11 @@ function LanguageSelect() {
             ) : (
               <>
                 {getLanguages(isPro).map((language) => (
+                  <SelectItem key={language} value={language}>
+                    {LanguagesSupportedMap[language]}
+                  </SelectItem>
+                ))}
+                {getNotSupportedLanguages(isPro).map((language) => (
                   <Link href={"/register"} key={language} prefetch={false}>
                     <SelectItem
                       key={language}
