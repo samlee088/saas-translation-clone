@@ -1,15 +1,22 @@
 import { authOptions } from "@/auth";
+import { chatMembersCollectionGroupRef } from "@/lib/converters/ChatMembers";
 import { getDocs } from "firebase/firestore";
 import { getServerSession } from "next-auth";
 import React from "react";
+import ChatListRows from "./ChatListRows";
 
 async function ChatList() {
   const session = await getServerSession(authOptions);
 
-  const chatsSnaopshot = await getDocs(
-    chatMembersCollectionGroupRef(session?.user.id)
+  const chatsSnapshot = await getDocs(
+    chatMembersCollectionGroupRef(session?.user.id!)
   );
-  return <div></div>;
+
+  const initialChats = chatsSnapshot.docs.map((doc) => ({
+    ...doc.data(),
+    timestamp: null,
+  }));
+  return <ChatListRows initialChats={initialChats} />;
 }
 
 export default ChatList;

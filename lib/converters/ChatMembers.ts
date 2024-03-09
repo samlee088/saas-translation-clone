@@ -1,5 +1,4 @@
 import { db } from "@/firebase";
-import { Subscription } from "@/types/Subscriptions";
 import {
   DocumentData,
   FirestoreDataConverter,
@@ -11,7 +10,6 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { Subscript } from "lucide-react";
 
 export interface ChatMembers {
   userId: string;

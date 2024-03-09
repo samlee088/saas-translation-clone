@@ -40,9 +40,26 @@ function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
       isAdmin: true,
       chatId: chatId,
       image: session.user.image || "",
-    });
-
-    router.push(`/chat/placeholder`);
+    })
+      .then(() => {
+        toast({
+          title: "Success",
+          description: "Your chat has been created!",
+          className: "bg-green-600 text-white",
+          duration: 2000,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        toast({
+          title: "Error",
+          description: "There was an error creating your chat!",
+          variant: "destructive",
+        });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   if (isLarge) {
