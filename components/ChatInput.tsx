@@ -7,14 +7,26 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { addDoc, serverTimestamp } from "firebase/firestore";
-import { User, messagesRef } from "@/lib/converters/Message";
+import { addDoc, getDocs, serverTimestamp } from "firebase/firestore";
+import {
+  User,
+  limitedMessagesRef,
+  messagesRef,
+} from "@/lib/converters/Message";
+import { useRouter } from "next/navigation";
+import { useSubscriptionStore } from "@/store/store";
+
+import { ToastAction } from "./ui/toast";
+import { useToast } from "./ui/use-toast";
 
 const formSchema = z.object({
   input: z.string().max(1000),
 });
 function ChatInput({ chatId }: { chatId: string }) {
   const { data: session } = useSession();
+  const router = useRouter();
+  const subscription = useSubscriptionStore((state) => state.subscription);
+  const toast = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -33,6 +45,30 @@ function ChatInput({ chatId }: { chatId: string }) {
     }
 
     // TODO: Check if user is pro and limit them creating a new chat
+
+    const messages = (await getDocs(limitedMessagesRef(chatId))).docs.map(
+      (doc) => doc.data()
+    ).length;
+
+    const isPro =
+      subscription?.role === "pro" && subscription.status === "active";
+
+    if (!isPro && messages >= 20) {
+      toast({
+        title: "Free plan limit exceeded",
+        description:
+          "You've exceeded the FREE plan of 20 messages per chat. Upgrade to PRO for unlimited chat messages!",
+        variant: "destructive",
+        action: (
+          <ToastAction
+            altText="Upgrade"
+            onClick={() => router.push("/register")}
+          >
+            Upgrade to Pro
+          </ToastAction>
+        ),
+      });
+    }
 
     const userToStore: User = {
       id: session.user.id!,
