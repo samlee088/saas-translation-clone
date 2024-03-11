@@ -30,6 +30,7 @@ function ChatMessages({
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, messagesEndRef]);
+
   return (
     <div className="p-5">
       {!loading && messages?.length === 0 && (
