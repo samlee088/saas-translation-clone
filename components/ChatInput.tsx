@@ -23,10 +23,11 @@ const formSchema = z.object({
   input: z.string().max(1000),
 });
 function ChatInput({ chatId }: { chatId: string }) {
+  console.log(chatId);
   const { data: session } = useSession();
   const router = useRouter();
   const subscription = useSubscriptionStore((state) => state.subscription);
-  const toast = useToast();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
