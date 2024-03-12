@@ -58,6 +58,12 @@ export const chatMembersRef = (chatId: string) =>
     chatMembersConverter
   );
 
+export const chatMemberAdminRef = (chatId: string) =>
+  query(
+    collection(db, "chats", chatId, "members"),
+    where("isAdmin", "==", true)
+  ).withConverter(chatMembersConverter);
+
 export const chatMembersCollectionGroupRef = (userId: string) =>
   query(
     collectionGroup(db, "members"),
