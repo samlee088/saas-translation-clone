@@ -45,8 +45,6 @@ function ChatInput({ chatId }: { chatId: string }) {
       return;
     }
 
-    // TODO: Check if user is pro and limit them creating a new chat
-
     const messages = (await getDocs(limitedMessagesRef(chatId))).docs.map(
       (doc) => doc.data()
     ).length;
