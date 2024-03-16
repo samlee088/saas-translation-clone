@@ -9,7 +9,7 @@ function UserAvatar({
   className,
 }: {
   name?: string | null;
-  image: string;
+  image?: string | null;
   className?: string;
 }) {
   return (
