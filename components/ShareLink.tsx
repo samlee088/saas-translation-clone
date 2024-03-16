@@ -33,7 +33,7 @@ function ShareLink({
 
   const linkToChat =
     process.env.NODE_ENV === "development"
-      ? `http://${host}/chat.${chatId}`
+      ? `http://${host}/chat/${chatId}`
       : `https://${host}/chat/${chatId}`;
 
   async function copyToClipboard() {
