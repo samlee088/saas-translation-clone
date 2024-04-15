@@ -7,7 +7,6 @@ import {
   SnapshotOptions,
   collection,
 } from "firebase/firestore";
-import { Subscript } from "lucide-react";
 
 const subscriptionConverter: FirestoreDataConverter<Subscription> = {
   toFirestore: function (subscription: Subscription): DocumentData {

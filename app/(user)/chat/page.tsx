@@ -18,7 +18,7 @@ function ChatsPage({ searchParams: { error } }: Props) {
       )}
 
       <ChatList />
-    </div>
+    </div> 
   );
 }
 
